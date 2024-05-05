@@ -1,0 +1,62 @@
+# Input for number of queens
+N = int(input("Enter no.of queens: "))
+
+# Function to print the solution board
+def printsol(board):
+    for row in board:
+        for cell in row:
+            print(cell, end=" ")
+        print()
+
+# Function to check if placing a queen is safe at the given position
+def is_safe(board, row, col):
+    # Check if there's a queen in the same row on the left side
+    for i in range(col):
+        if board[row][i] == 1:
+            return False
+
+    # Check the upper diagonal on the left side
+    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+        if board[i][j] == 1:
+            return False
+
+    # Check the lower diagonal on the left side
+    for i, j in zip(range(row, N, 1), range(col, -1, -1)):
+        if board[i][j] == 1:
+            return False
+
+    return True
+
+# Recursive utility function to solve the N-Queens problem
+def solveNQUtil(board, col):
+    if col >= N:
+        return True
+
+    for row in range(N):
+        if is_safe(board, row, col):
+            board[row][col] = 1  # Place a queen
+
+            # Recursively try to place the rest of the queens
+            if solveNQUtil(board, col + 1):
+                return True
+            
+            # If placing the queen here doesn't lead to a solution, remove it (backtrack)
+            board[row][col] = 0
+    
+    return False  # No valid placement found for this column
+
+# Main function to solve the N-Queens problem
+def solveprob():
+    board = [[0 for _ in range(N)] for _ in range(N)]  # Create an empty board
+
+    if not solveNQUtil(board, 0):
+        print("Solution does not exist")
+        return False
+
+    printsol(board)
+    return True
+
+# Execution starts here
+print()
+print(f"Solution for {N} Queen problem is:")
+solveprob()

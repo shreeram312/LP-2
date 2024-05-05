@@ -1,0 +1,26 @@
+# Function to implement the Selection Sort algorithm
+def selectionSort(array, size):
+    # Traverse through the array
+    for val in range(size):
+        # Assume the current element as the minimum
+        minvalue = val
+        # Check for a smaller element in the rest of the array
+        for i in range(val + 1, size):
+            if arr[i] < arr[minvalue]:
+                minvalue = i
+        
+        # Swap the found minimum element with the current element
+        (array[val], array[minvalue]) = (array[minvalue], array[val])
+
+# Test array
+arr = [6, 3, 5, 2, 1, 4]
+length = len(arr)
+
+# Display the array before sorting
+print("Before sorting:", arr)
+
+# Apply the Selection Sort algorithm
+selectionSort(arr, length)
+
+# Display the array after sorting
+print("After sorting:", arr)

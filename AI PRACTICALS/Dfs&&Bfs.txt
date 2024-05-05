@@ -1,0 +1,71 @@
+# Define the graph
+graph = {
+    '5': ['3', '7'],
+    '3': ['5', '4'],
+    '7': ['8'],
+    '2': [],
+    '4': ['8'],
+    '8': []
+}
+
+# Initialize the set of visited nodes
+visited = set()
+
+# Define the Depth-First Search function
+def dfs(graph, node):
+    if node not in visited:
+        print(node, end=" ")  # Print the current node
+        visited.add(node)  # Add the node to the set of visited nodes
+        for neighbour in graph[node]:  # Explore each neighboring node
+            dfs(graph, neighbour)  # Recursively call dfs for each neighbor
+
+# Perform DFS starting from node '5'
+print("DFS:")
+dfs(graph, '5')  # Start the DFS traversal from node '5'
+
+
+
+
+
+# BFS
+
+
+# Define the graph as an adjacency list
+graph = {
+    '5': ['3', '7'],
+    '3': ['2', '4'],
+    '7': ['8'],
+    '2': [],
+    '4': ['8'],
+    '8': []
+}
+
+# Initialize a set to keep track of visited nodes
+visited = set()
+
+# Initialize a queue for BFS
+queue = []
+
+# Define the BFS function
+def bfs(graph, start_node):
+    # Add the starting node to the visited set and the queue
+    visited.add(start_node)
+    queue.append(start_node)
+    
+    # Loop while the queue is not empty
+    while queue:
+        # Dequeue the first element from the queue
+        current_node = queue.pop(0)
+        # Print the current node
+        print(current_node, end=" ")
+        
+        # Explore the neighbors of the current node
+        for neighbour in graph[current_node]:
+            if neighbour not in visited:
+                # If the neighbor has not been visited, mark it as visited and enqueue it
+                visited.add(neighbour)
+                queue.append(neighbour)
+
+# Print the result of the BFS traversal
+print("\nBFS:")
+bfs(graph, '5')  # Start the BFS from node '5'
